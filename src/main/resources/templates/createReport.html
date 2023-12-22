@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Utwórz Zgłoszenie</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>Utwórz Zgłoszenie</h1>
+<form th:action="@{/createReport}" th:object="${report}" method="post">
+  <p>Id: <input type="text" th:field="*{id}" /></p>
+  <p>Data zgłoszenia: <input type="date" th:field="*{reportDate}" /></p>
+  <p>Osoba zgłaszająca: <input type="text" th:field="*{reportingUser}" /></p>
+  <p>Osoba przypisana: <input type="text" th:field="*{assignedUser}" /></p>
+  <p>Treść Zgłoszenia: <textarea th:field="*{content}"></textarea></p>
+  <p>Adres Zgłoszenia: <input type="text" th:field="*{address}" /></p>
+  <button type="submit">Wyślij</button>
+</form>
+<div th:if="${success}" th:text="${success}"></div>
+</body>
+</html>

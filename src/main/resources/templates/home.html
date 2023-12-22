@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Strona główna</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>Witaj na stronie głównej!</h1>
+<a th:href="@{/createReport}">Utwórz zgłoszenie</a>
+
+<br>
+<a th:href="@{/logout}">Wyloguj</a>
+</body>
+</html>
