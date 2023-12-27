@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
-import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -51,8 +50,6 @@ public class UserService implements UserDetailsService {
         userRepository.save(newUser);
     }
 
-    //metoda używana do rejestracji użytkownika
-
     public boolean userExists(String username) {
         User user = userRepository.findByUsername(username);
         return user != null;
@@ -69,17 +66,5 @@ public class UserService implements UserDetailsService {
         return true;
     }
 }
-
-  /*@Transactional
-    public boolean registerNewUser(User user) {
-        if (isPresent(user.getUsername())){
-            return false;
-        }
-        user.setUsername();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        saveUser(user);
-        return true;
-    }
-    */
 
 

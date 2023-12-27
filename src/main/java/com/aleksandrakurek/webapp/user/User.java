@@ -1,7 +1,8 @@
 package com.aleksandrakurek.webapp.user;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -11,7 +12,6 @@ import java.io.Serializable;
 @Table(name ="user")
 @Getter
 @Setter
-//@ToString
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.constraints.NotBlank;
 
 @RestController
@@ -36,7 +35,7 @@ public class UserController {
         return "register";
     }
 
-    //Metoda obsługuje przesłane dane formularza rejestracji. Dane są automatycznie mapowane na obiekt User dzięki adnotacji @ModelAttribute.
+    //Metoda obsługuje przesłane dane formularza rejestracji. Dane są automatycznie mapowane na obiekt User.
 
     @PostMapping("/register")
     public ModelAndView register(@RequestParam String username, @RequestParam String password) {

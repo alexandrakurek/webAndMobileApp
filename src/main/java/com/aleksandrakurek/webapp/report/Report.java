@@ -1,9 +1,7 @@
 package com.aleksandrakurek.webapp.report;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
-
 @Entity
 @Table(name = "reports")
 public class Report {

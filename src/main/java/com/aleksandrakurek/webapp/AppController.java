@@ -4,7 +4,6 @@ import com.aleksandrakurek.webapp.report.Report;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 @Controller
 public class AppController {
 
@@ -25,7 +24,7 @@ public class AppController {
 
     @GetMapping("/register")
     public String viewAfterRegister() {
-        return "register";
+        return "redirect:login";
     }
 
     @GetMapping("/createReport")
