@@ -3,21 +3,27 @@ package com.aleksandrakurek.webapp.report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/reports")
 public class ReportController {
-    @Autowired
     private ReportService reportService;
+    @Autowired
+    public ReportController(ReportService reportService) {
+        this.reportService = reportService;
+    }
+
     @GetMapping
     public List<Report> getAllReports(){
         return reportService.findAllReports();
     }
     @PostMapping("/create")
-    public Report createReport(@RequestParam Report report){
-        return reportService.createReport(report);
+    public ModelAndView createReport(@ModelAttribute Report report){
+         reportService.createReport(report);
+         return new ModelAndView("redirect:/reports/send");
     }
     @GetMapping ("/{id}")
     public ResponseEntity<Report> updateReport(@PathVariable Long id, @RequestParam Report reportDetails){
