@@ -7,8 +7,12 @@ import java.util.Optional;
 
 @Service
 public class ReportService {
-    @Autowired
+
     private ReportRepository reportRepository;
+    @Autowired
+    public ReportService(ReportRepository reportRepository){
+        this.reportRepository = reportRepository;
+    }
     public Report createReport(Report report){
         return reportRepository.save(report);
     }

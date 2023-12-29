@@ -15,7 +15,7 @@ public class ReportController {
     public List<Report> getAllReports(){
         return reportService.findAllReports();
     }
-    @PostMapping
+    @PostMapping("/create")
     public Report createReport(@RequestParam Report report){
         return reportService.createReport(report);
     }

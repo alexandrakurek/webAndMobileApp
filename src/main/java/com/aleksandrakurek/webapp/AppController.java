@@ -23,8 +23,12 @@ public class AppController {
     }
 
     @GetMapping("/register")
+    public String viewRegisterPage() {
+        return "register";
+    }
+    @GetMapping("/register/login")
     public String viewAfterRegister() {
-        return "redirect:login";
+        return "login";
     }
 
     @GetMapping("/createReport")
