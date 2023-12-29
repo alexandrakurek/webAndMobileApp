@@ -25,4 +25,7 @@ public class ReportService {
         reportRepository.deleteById(id);
     }
 
+    public List<Report> findAllReports() {
+        return reportRepository.findAll();
+    }
 }

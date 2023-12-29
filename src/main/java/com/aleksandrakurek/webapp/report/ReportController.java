@@ -13,7 +13,7 @@ public class ReportController {
     private ReportService reportService;
     @GetMapping
     public List<Report> getAllReports(){
-        return reportService.getAllReports();
+        return reportService.findAllReports();
     }
     @PostMapping
     public Report createReport(@RequestParam Report report){
