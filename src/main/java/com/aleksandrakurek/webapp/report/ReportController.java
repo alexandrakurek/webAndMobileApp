@@ -1,5 +1,6 @@
 package com.aleksandrakurek.webapp.report;
 
+import org.atmosphere.config.service.Get;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,11 @@ public class ReportController {
     public ModelAndView createReport(@ModelAttribute Report report){
          reportService.createReport(report);
          return new ModelAndView("redirect:/reports/send");
+    }
+    @GetMapping("/send")
+    public ModelAndView sendReport(){
+        ModelAndView modelAndView = new ModelAndView("report_sent");
+        return modelAndView;
     }
     @GetMapping ("/{id}")
     public ResponseEntity<Report> updateReport(@PathVariable Long id, @RequestParam Report reportDetails){
