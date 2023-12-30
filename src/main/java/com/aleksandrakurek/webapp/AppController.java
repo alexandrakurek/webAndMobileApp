@@ -36,5 +36,9 @@ public class AppController {
         model.addAttribute("report", new Report());
         return "createReport";
     }
+    @GetMapping("/reports_sent")
+    public String viewAfterSendReport() {
+        return "report_sent";
+    }
 
 }

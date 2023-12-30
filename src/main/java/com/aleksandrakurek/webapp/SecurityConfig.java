@@ -10,8 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -20,7 +18,7 @@ public class SecurityConfig {
         http
                 //konfiguracja autoryzacji
                 .authorizeRequests(authorize ->authorize
-                        .requestMatchers("/", "/login", "/register", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/", "/login", "/register", "report_sent", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/home").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/reports").hasAuthority("USER")
                         .anyRequest().authenticated()    //kazdy request ma byc autoryzowany.
