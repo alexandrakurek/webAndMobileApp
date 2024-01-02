@@ -1,59 +1,48 @@
 package com.aleksandrakurek.webapp.report;
 
-import org.atmosphere.config.service.Get;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/reports")
 public class ReportController {
-    private ReportService reportService;
+    private ReportRepository reportRepository;
     @Autowired
-    public ReportController(ReportService reportService) {
-        this.reportService = reportService;
+    public ReportController(ReportRepository reportRepository) {
+        this.reportRepository = reportRepository;
     }
 
     @GetMapping
-    public List<Report> getAllReports(){
-        return reportService.findAllReports();
+    public String listReports(Model model){
+        model.addAttribute("reports", reportRepository.findAll());
+        return "reports";
     }
-    @PostMapping("/create")
-    public ModelAndView createReport(@ModelAttribute Report report){
-         reportService.createReport(report);
-         return new ModelAndView("redirect:/reports/send");
+    @GetMapping("/report")
+    public String showReportForm(Model model){
+        model.addAttribute("report", new Report());
+        return "report";
     }
-    @GetMapping("/send")
-    public ModelAndView sendReport(){
-        ModelAndView modelAndView = new ModelAndView("report_sent");
-        return modelAndView;
+    @PostMapping("/reports/save")
+    public String saveReport(@ModelAttribute Report report, Model model){
+        reportRepository.save(report);
+        model.addAttribute("message", "Zgłoszenie zostało wysłane pomyślnie.");
+        return "report";
     }
-    @GetMapping ("/{id}")
-    public ResponseEntity<Report> updateReport(@PathVariable Long id, @RequestParam Report reportDetails){
-        return reportService.getReportById(id)
-                .map(report -> {
-                    report.setReportingUser(reportDetails.getReportingUser());
-                    report.setAssignedUser(reportDetails.getAssignedUser());
-                    report.setContent(reportDetails.getContent());
-                    report.setAddress(reportDetails.getAddress());
-                    Report updateReport = reportService.updateReport(report);
-                    return ResponseEntity.ok(updateReport);
-                })
-                .orElseGet(() ->ResponseEntity.notFound().build());
-    }
-    @DeleteMapping ("/{id}")
-    public ResponseEntity<?> deleteReport(@PathVariable Long id) {
-        return reportService.getReportById(id)
-                .map(report -> {
-                        reportService.deleteReport(id);
-                return ResponseEntity.ok().build();
-    })
-            .orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/edit/{id}")
+    public String editReportForm(@PathVariable Long id, Model model){
+        Report report = reportRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid report Id:" + id));
+        model.addAttribute("report", report);
+        return "report";
     }
 
+    @DeleteMapping ("/delete/{id}")
+    public String deleteReport(@PathVariable Long id){
+        reportRepository.deleteById(id);
+        return "redirect:/reports";
+    }
 
 
 }

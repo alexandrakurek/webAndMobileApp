@@ -2,13 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Strona główna</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/index_style.css}" />
 </head>
 <body>
-<h1>Witaj na stronie głównej!</h1>
-<a th:href="@{/createReport}">Utwórz zgłoszenie</a>
+<div class="containter">
+  <header>
+    <h1>Witaj w systemie zgłoszeń!</h1>
+    <nav>
+      <a href="/createReport" class="btn">Utwórz zgłoszenie</a>
+      <a href="/login" class="btn">Wyloguj się</a>
+    </nav>
 
-<br>
-<a th:href="@{/logout}">Wyloguj</a>
+  </header>
+</div>
+
 </body>
 </html>

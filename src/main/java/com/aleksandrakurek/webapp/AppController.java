@@ -38,7 +38,7 @@ public class AppController {
     }
     @GetMapping("/reports_sent")
     public String viewAfterSendReport() {
-        return "report_sent";
+        return "message.css";
     }
 
 }

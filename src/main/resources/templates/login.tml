@@ -1,7 +1,0 @@
-<t:layout title="Logowanie">
-    <form t:type="form" t:id="form">
-        <input t:type="textfield" t:id="username" />
-        <input t:type="passwordfield" t:id="password" />
-        <input type="submit" value="Zaloguj" />
-    </form>
-</t:layout>

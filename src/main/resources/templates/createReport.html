@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>Formularz Zgłoszeniowy</title>
+  <title>Formularz zgłoszeniowy</title>
   <link rel="stylesheet" href="css/report.css">
 </head>
 <body>
 
 <div class="form-container">
-  <form action="SubmitServlet" method="post">
+  <form action="/reports/save" method="post">
     <h2>Formularz Zgłoszeniowy</h2>
 
     <div class="form-group">
@@ -43,6 +43,7 @@
 
     <button type="submit">Wyślij</button>
   </form>
+  <p th:if="${message}" class="message">${message}</p>
 </div>
 
 </body>

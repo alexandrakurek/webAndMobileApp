@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista Zgłoszeń</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div class="container">
+    <h1>Lista Zgłoszeń</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Data Zgłoszenia</th>
+            <th>Osoba Zgłaszająca</th>
+            <th>Osoba Przypisana</th>
+            <th>Treść Zgłoszenia</th>
+            <th>Adres Zgłoszenia</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="zgloszenie : ${zgloszenia}">
+            <td th:text="${zgloszenie.id}"></td>
+            <td th:text="${zgloszenie.dataZgloszenia}"></td>
+            <td th:text="${zgloszenie.osobaZglaszajaca}"></td>
+            <td th:text="${zgloszenie.osobaPrzypisana}"></td>
+            <td th:text="${zgloszenie.trescZgloszenia}"></td>
+            <td th:text="${zgloszenie.adresZgloszenia}"></td>
+            <td>
+                <a th:href="@{/zgloszenia/edytuj/{id}(id=${zgloszenie.id})}">Edytuj</a>
+                <a th:href="@{/zgloszenia/usun/{id}(id=${zgloszenie.id})}">Usuń</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

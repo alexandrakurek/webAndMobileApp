@@ -18,9 +18,10 @@ public class SecurityConfig {
         http
                 //konfiguracja autoryzacji
                 .authorizeRequests(authorize ->authorize
-                        .requestMatchers("/", "/login", "/register", "report_sent", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/", "/login", "/register", "message.css", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/home").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/reports").hasAuthority("USER")
+                        .requestMatchers("/createReport").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()    //kazdy request ma byc autoryzowany.
                         .and()
                 )

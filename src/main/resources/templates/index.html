@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Strona startowa</title>
-    <h1>Witaj na stronie startowej!</h1>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/index_style.css}" />
 </head>
 <body>
-<a href="/login">Zaloguj się</a>
-<br>
-<a href="/register">Zarejestruj się</a>
-<button type="submit">Zarejestruj się</button>
+<div class="containter">
+    <h1>Witaj w naszej aplikacji zgłoszeń!</h1>
+    <div class="navigation">
+        <a href="/login" class="btn">Zaloguj się</a>
+        <a href="/register" class="btn btn-secondary">Zarejestruj się</a>
+    </div>
+</div>
 </body>
 </html>

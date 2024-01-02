@@ -43,7 +43,7 @@ public class UserController {
         user.setUsername(username);
         user.setPassword(password);
 
-        boolean registrationSuccess = userService.registerNewUser(user);
+        boolean registrationSuccess = userService.registerUser(user);
         if (registrationSuccess) {
             userService.saveUser(user);
             return new ModelAndView("redirect:/login");
@@ -56,6 +56,7 @@ public class UserController {
 
     }
 }
+
 
 
 

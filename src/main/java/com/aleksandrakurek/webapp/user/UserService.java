@@ -56,15 +56,20 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public boolean registerNewUser(User user) {
+    public boolean registerUser(User user) {
         if (userExists(user.getUsername())) {
             return false;
         }
-        User newUser = new User();
-        newUser.setUsername(user.getUsername());
-        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(newUser);
+        registerNewUser(user.getUsername(), user.getPassword());
         return true;
+    }
+
+    @Transactional
+    public void registerNewUser(String username, String password) {
+        User newUser = new User();
+        newUser.setUsername(username);
+        newUser.setPassword(passwordEncoder.encode(password));
+        userRepository.save(newUser);
     }
 }
 
