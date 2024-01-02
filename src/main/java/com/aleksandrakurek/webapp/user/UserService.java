@@ -1,5 +1,6 @@
 package com.aleksandrakurek.webapp.user;
 
+import com.aleksandrakurek.webapp.RegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.Collections;
 
 @Service
@@ -44,33 +45,45 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public void saveUser(User newUser) {
+    public User saveUser(User newUser) {
         String encodedPassword = passwordEncoder.encode(newUser.getPassword());
         newUser.setPassword(encodedPassword);
         userRepository.save(newUser);
+        return newUser;
     }
 
-    public boolean userExists(String username) {
+    /* @Transactional(rollbackFor = Exception.class)
+     public User registerNewUser(String username, String password) {
+         User newUser = new User();
+         newUser.setUsername(username);
+         newUser.setPassword(passwordEncoder.encode(password));
+         return userRepository.save(newUser);
+     }
+     */
+  /*  public User registerNewUser(String username, String password) {
         User user = userRepository.findByUsername(username);
-        return user != null;
-    }
-
-    @Transactional
-    public boolean registerUser(User user) {
-        if (userExists(user.getUsername())) {
-            return false;
+        if (user == null) {
+            User newUser = new User();
+            newUser.setUsername(username);
+            newUser.setPassword(passwordEncoder.encode(password));
+            userRepository.save(newUser);
+            return newUser;
         }
-        registerNewUser(user.getUsername(), user.getPassword());
-        return true;
-    }
+        return null;
 
-    @Transactional
-    public void registerNewUser(String username, String password) {
+    }
+    */
+    public User registerNewUser(@Valid RegistrationDto registrationDto) {
         User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setPassword(passwordEncoder.encode(password));
+        newUser.setUsername(registrationDto.getUsername());
+        newUser.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
         userRepository.save(newUser);
+        return newUser;
     }
 }
+
+
+
+
 
 

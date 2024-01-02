@@ -8,28 +8,30 @@ import java.util.Optional;
 @Service
 public class ReportService {
 
-    private ReportRepository reportRepository;
+    private final ReportRepository reportRepository;
+
     @Autowired
-    public ReportService(ReportRepository reportRepository){
+    public ReportService(ReportRepository reportRepository) {
         this.reportRepository = reportRepository;
     }
-    public Report createReport(Report report){
-        return reportRepository.save(report);
+
+    public void createReport(Report report) {
+        reportRepository.save(report);
     }
-    public Optional <Report> getReportById(Long id){
+
+    public Optional<Report> getReportById(Long id) {
         return reportRepository.findById(id);
-    }
-    public List <Report> getAllReports(){
-        return reportRepository.findAll();
-    }
-    public Report updateReport(Report report) {
-        return reportRepository.save(report);
-    }
-    public void deleteReport(Long id){
-        reportRepository.deleteById(id);
     }
 
     public List<Report> findAllReports() {
         return reportRepository.findAll();
+    }
+
+    public Report updateReport(Report report) {
+        return reportRepository.save(report);
+    }
+
+    public void deleteReport(Long id) {
+        reportRepository.deleteById(id);
     }
 }

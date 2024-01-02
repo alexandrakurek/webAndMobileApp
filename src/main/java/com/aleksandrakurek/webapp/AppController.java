@@ -1,9 +1,12 @@
 package com.aleksandrakurek.webapp;
 
 import com.aleksandrakurek.webapp.report.Report;
+import org.atmosphere.config.service.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
 @Controller
 public class AppController {
 
@@ -26,9 +29,10 @@ public class AppController {
     public String viewRegisterPage() {
         return "register";
     }
+
     @GetMapping("/register/login")
     public String viewAfterRegister() {
-        return "login";
+        return "/register/login";
     }
 
     @GetMapping("/createReport")

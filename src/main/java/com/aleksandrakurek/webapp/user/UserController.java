@@ -1,9 +1,14 @@
 package com.aleksandrakurek.webapp.user;
 
+import com.aleksandrakurek.webapp.RegistrationDto;
+import org.atmosphere.config.service.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 @RestController
@@ -34,28 +39,41 @@ public class UserController {
         model.addAttribute("user", new User());
         return "register";
     }
+    @PostMapping
+    public String registerUser(@ModelAttribute @Valid RegistrationDto registrationDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
+        userService.registerNewUser(registrationDto);
+        return "redirect:/login";
+    }
 
-    //Metoda obsługuje przesłane dane formularza rejestracji. Dane są automatycznie mapowane na obiekt User.
+}
+    /*
 
     @PostMapping("/register")
     public ModelAndView register(@RequestParam String username, @RequestParam String password) {
-        User user = new User();
+        ModelAndView modelAndView = new ModelAndView("/register");
+
+     User user = new User();
         user.setUsername(username);
         user.setPassword(password);
 
-        boolean registrationSuccess = userService.registerUser(user);
-        if (registrationSuccess) {
-            userService.saveUser(user);
-            return new ModelAndView("redirect:/login");
+
+     User registrationSuccess = userService.registerNewUser(username,password);
+        if (registrationSuccess != null) {
+            modelAndView.setViewName("redirect:/login");
+
+
         } else {
-            ModelAndView modelAndView = new ModelAndView("register");
-            modelAndView.addObject("registrationError", "Nazwa użytkownika jest zajęta");
-            return modelAndView;
+            modelAndView.setViewName("register"); // powrót do formularza rejestracji
+            modelAndView.addObject("error", "Nie udało się zarjestrować użytkownika");
         }
+        return modelAndView;
+
+    } */
 
 
-    }
-}
 
 
 

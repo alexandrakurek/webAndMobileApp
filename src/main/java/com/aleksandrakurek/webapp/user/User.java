@@ -25,12 +25,12 @@ public class User implements Serializable {
     @Size(min = 6, message = "Hasło musi mieć co najmniej 6 znaków")
     private String password;
 
-    public User(String username) {
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public User() {
-        this.username = username;
-        this.password = password;
     }
 
     public String getUsername() {
@@ -40,8 +40,7 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
-
-    public void setUsername() {
+    public void setUsername(String username) {
         this.username = username;
     }
 

@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/reports")
 public class ReportController {
-    private ReportRepository reportRepository;
+    private final ReportService reportService;
     @Autowired
-    public ReportController(ReportRepository reportRepository) {
-        this.reportRepository = reportRepository;
+    public ReportController(ReportService reportService) {
+        this.reportService = reportService;
     }
 
     @GetMapping
     public String listReports(Model model){
-        model.addAttribute("reports", reportRepository.findAll());
+        model.addAttribute("reports", reportService.findAllReports());
         return "reports";
     }
     @GetMapping("/report")
@@ -27,20 +27,20 @@ public class ReportController {
     }
     @PostMapping("/reports/save")
     public String saveReport(@ModelAttribute Report report, Model model){
-        reportRepository.save(report);
+        reportService.createReport(report);
         model.addAttribute("message", "Zgłoszenie zostało wysłane pomyślnie.");
-        return "report";
+        return "reports";
     }
     @GetMapping("/edit/{id}")
     public String editReportForm(@PathVariable Long id, Model model){
-        Report report = reportRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid report Id:" + id));
+        Report report = reportService.getReportById(id).orElseThrow(() -> new IllegalArgumentException("Invalid report Id:" + id));
         model.addAttribute("report", report);
         return "report";
     }
 
     @DeleteMapping ("/delete/{id}")
     public String deleteReport(@PathVariable Long id){
-        reportRepository.deleteById(id);
+        reportService.deleteReport(id);
         return "redirect:/reports";
     }
 
