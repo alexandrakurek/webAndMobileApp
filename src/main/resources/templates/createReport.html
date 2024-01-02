@@ -1,20 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl">
 <head>
-  <title>Utwórz Zgłoszenie</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <meta charset="UTF-8">
+  <title>Formularz Zgłoszeniowy</title>
+  <link rel="stylesheet" href="css/report.css">
 </head>
 <body>
-<h1>Utwórz Zgłoszenie</h1>
-<form th:action="@{/createReport}" th:object="${report}" method="post">
-  <p>Id: <input type="text" th:field="*{id}" /></p>
-  <p>Data zgłoszenia: <input type="date" th:field="*{reportDate}" /></p>
-  <p>Osoba zgłaszająca: <input type="text" th:field="*{reportingUser}" /></p>
-  <p>Osoba przypisana: <input type="text" th:field="*{assignedUser}" /></p>
-  <p>Treść Zgłoszenia: <textarea th:field="*{content}"></textarea></p>
-  <p>Adres Zgłoszenia: <input type="text" th:field="*{address}" /></p>
-  <button type="submit">Wyślij</button>
-</form>
-<div th:if="${success}" th:text="${success}"></div>
+
+<div class="form-container">
+  <form action="SubmitServlet" method="post">
+    <h2>Formularz Zgłoszeniowy</h2>
+
+    <div class="form-group">
+      <label for="id">Id zgłoszenia:</label>
+      <input type="text" id="id" name="id">
+    </div>
+
+    <div class="form-group">
+      <label for="date">Data zgłoszenia:</label>
+      <input type="date" id="date" name="date">
+    </div>
+
+    <div class="form-group">
+      <label for="reporter">Osoba zgłaszająca:</label>
+      <input type="text" id="reporter" name="reporter">
+    </div>
+
+    <div class="form-group">
+      <label for="assignee">Osoba przypisana:</label>
+      <input type="text" id="assignee" name="assignee">
+    </div>
+
+    <div class="form-group">
+      <label for="content">Treść Zgłoszenia:</label>
+      <textarea id="content" name="content"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Adres Zgłoszenia:</label>
+      <input type="text" id="address" name="address">
+    </div>
+
+    <button type="submit">Wyślij</button>
+  </form>
+</div>
+
 </body>
 </html>

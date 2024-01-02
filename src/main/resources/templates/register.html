@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
   <title>Rejestracja</title>
-  <link rel="stylesheet" th:href="@{/static.css/register.css}" />
+  <link rel="stylesheet" th:href="@{css/register.css}" />
 
 </head>
 <body>
 <div class="register-container">
-  <h2 class="register-title">Rejestracja</h2>
-    <form action="/register" method="post" class="register-form">
+  <h2>Rejestracja</h2>
+    <form action="@{/register}" method="post" class="register-form">
 
     <div class="form-group">
       <label for="username">Nazwa użytkownika:</label>
