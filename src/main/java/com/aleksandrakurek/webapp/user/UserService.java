@@ -8,8 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.validation.Valid;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 
 @Service
@@ -45,42 +44,17 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public User saveUser(User newUser) {
-        String encodedPassword = passwordEncoder.encode(newUser.getPassword());
-        newUser.setPassword(encodedPassword);
-        userRepository.save(newUser);
-        return newUser;
-    }
-
-    /* @Transactional(rollbackFor = Exception.class)
-     public User registerNewUser(String username, String password) {
-         User newUser = new User();
-         newUser.setUsername(username);
-         newUser.setPassword(passwordEncoder.encode(password));
-         return userRepository.save(newUser);
-     }
-     */
-  /*  public User registerNewUser(String username, String password) {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            User newUser = new User();
-            newUser.setUsername(username);
-            newUser.setPassword(passwordEncoder.encode(password));
-            userRepository.save(newUser);
-            return newUser;
-        }
-        return null;
-
-    }
-    */
-    public User registerNewUser(@Valid RegistrationDto registrationDto) {
+    @Transactional
+    public User saveUser(String username, String password) {
         User newUser = new User();
-        newUser.setUsername(registrationDto.getUsername());
-        newUser.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
-        userRepository.save(newUser);
-        return newUser;
+        newUser.setUsername(username);
+        newUser.setPassword(passwordEncoder.encode(password));
+       return userRepository.save(newUser);
     }
+
+
 }
+
 
 
 

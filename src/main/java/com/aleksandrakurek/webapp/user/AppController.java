@@ -1,14 +1,19 @@
-package com.aleksandrakurek.webapp;
+package com.aleksandrakurek.webapp.user;
 
 import com.aleksandrakurek.webapp.report.Report;
-import org.atmosphere.config.service.Post;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AppController {
+    private final UserRepository userRepository;
+    @Autowired
+    public AppController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/")
     public String viewHomePage() {
@@ -24,17 +29,11 @@ public class AppController {
     public String viewAfterLogin() {
         return "home";
     }
-
     @GetMapping("/register")
-    public String viewRegisterPage() {
+    public String showRegistrationForm(Model model, HttpSession httpSession) {
+        model.addAttribute("user", userRepository.findAll());
         return "register";
     }
-
-    @GetMapping("/register/login")
-    public String viewAfterRegister() {
-        return "/register/login";
-    }
-
     @GetMapping("/createReport")
     public String viewAfterCreateReport(Model model) {
         model.addAttribute("report", new Report());
