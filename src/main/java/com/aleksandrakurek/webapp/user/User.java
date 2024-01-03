@@ -1,7 +1,9 @@
 package com.aleksandrakurek.webapp.user;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
@@ -10,6 +12,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name ="user")
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class User implements Serializable {
@@ -24,30 +28,6 @@ public class User implements Serializable {
     @NotBlank(message = "Hasło nie może być puste")
     @Size(min = 6, message = "Hasło musi mieć co najmniej 6 znaków")
     private String password;
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public User() {
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 
 }
 
