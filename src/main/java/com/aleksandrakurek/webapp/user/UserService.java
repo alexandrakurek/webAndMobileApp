@@ -45,10 +45,10 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public User saveUser(String username, String password) {
+    public User saveUser(User user) {
         User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setPassword(passwordEncoder.encode(password));
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
        return userRepository.save(newUser);
     }
 

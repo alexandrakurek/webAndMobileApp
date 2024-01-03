@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-
 @Component
 @Configuration
 public class DbInit implements CommandLineRunner {
@@ -25,9 +24,11 @@ public class DbInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        userService.saveUser(new User("user", "12145875"));
+
 
         // Tworzenie przykładowego użytkownika i zapis do bazy danych
-       userService.saveUser("Ada","1478741");
+      // userService.saveUser(new User());
 
 
 

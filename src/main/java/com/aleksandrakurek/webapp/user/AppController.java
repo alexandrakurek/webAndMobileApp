@@ -30,8 +30,8 @@ public class AppController {
         return "home";
     }
     @GetMapping("/register")
-    public String showRegistrationForm(Model model, HttpSession httpSession) {
-        model.addAttribute("user", userRepository.findAll());
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("user",new User());
         return "register";
     }
     @GetMapping("/createReport")

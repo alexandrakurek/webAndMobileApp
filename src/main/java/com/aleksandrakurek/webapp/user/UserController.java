@@ -31,7 +31,7 @@ public class UserController {
     }
     @PostMapping
     public String addUser (User user) {
-        userService.saveUser(user.getUsername(), user.getPassword());
+        userService.saveUser(user);
         return "redirect:/login";
     }
 
