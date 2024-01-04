@@ -3,7 +3,7 @@
 Projekt składa się z dwóch głównych komponentów: aplikacji webowej i mobilnej. Aplikacja webowa została zbudowana przy użyciu frameworka Spring i komunikuje się z bazą danych MariaDB. Aplikacja mobilna, stworzona na platformie Android, umożliwia logowanie i interakcję z systemem.
 
 ### Aplikacja Webowa
-####Technologie:
+#### Technologie:
 - Spring Framework
 - MariaDB
 - REST API
