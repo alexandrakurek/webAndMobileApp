@@ -25,7 +25,7 @@ public class DbInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Tworzenie przykładowego użytkownika i zapis do bazy danych
-        userService.saveUser(new User("user", "12145875"));
+      //  userService.saveUser(new User("user", "12145875"));
 
 
 

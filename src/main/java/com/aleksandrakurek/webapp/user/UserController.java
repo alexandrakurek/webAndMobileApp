@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 
 @Controller
-@RequestMapping
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
